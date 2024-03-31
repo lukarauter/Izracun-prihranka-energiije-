@@ -1,0 +1,10 @@
+C:\GitHubProjects\Izracun-prihranka-energiije-\bin\Debug\Izračun Energije App.exe.config
+C:\GitHubProjects\Izracun-prihranka-energiije-\bin\Debug\Izračun Energije App.exe
+C:\GitHubProjects\Izracun-prihranka-energiije-\bin\Debug\Izračun Energije App.pdb
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun Energije App.csproj.AssemblyReference.cache
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun_Energije_App.Form1.resources
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun_Energije_App.Properties.Resources.resources
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun Energije App.csproj.GenerateResource.cache
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun Energije App.csproj.CoreCompileInputs.cache
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun Energije App.exe
+C:\GitHubProjects\Izracun-prihranka-energiije-\obj\Debug\Izračun Energije App.pdb
