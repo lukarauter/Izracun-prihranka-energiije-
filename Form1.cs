@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +15,66 @@ namespace Izračun_Energije_App
     public partial class Form1 : Form
     {
 
+
         private ErrorProvider errorProvider;
+
         public Form1()
         {
             InitializeComponent();
             errorProvider = new ErrorProvider();
+            cena_kolja.Validating += ValidateInput;
+            cena_zemeljskega_plina.Validating += ValidateInput;
+            cena_plina.Validating += ValidateInput;
+            cena_elektrike.Validating += ValidateInput;
 
+
+
+            cena_kolja.Enabled = false;
+            cena_zemeljskega_plina.Enabled = false;
+            cena_plina.Enabled = false;
+            cena_elektrike.Enabled = false;
+
+            this.FormClosing += Form1_FormClosing;
         }
 
-        
+        private void ValidateInput(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                float value;
+                if (!float.TryParse(textBox.Text, out value) || value < 0)
+                {
+                    e.Cancel = true;
+                    errorProvider.SetError(textBox, "Vnesite veljavno pozitivno število.");
+                }
+                else
+                {
+                    e.Cancel = false;
+                    errorProvider.SetError(textBox, "");
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string datumZapisa = DateTime.Now.ToString();
+
+            using (StreamWriter writer = new StreamWriter("CeneEnergentov.txt", true))
+            {
+                writer.WriteLine($"Datum zapisa: {datumZapisa}");
+                writer.WriteLine($"Kurilno olje: {cena_kolja.Text}");
+                writer.WriteLine($"Zemeljski Plin: {cena_zemeljskega_plina.Text}");
+                writer.WriteLine($"Utekočinjeni naftni plin plin: {cena_plina.Text}");
+                writer.WriteLine();
+            }
+      
+        }
+
+
+    
+
 
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -149,7 +201,8 @@ namespace Izračun_Energije_App
 
         private void label3_Click_2(object sender, EventArgs e)
         {
-            
+            label3.AutoSize = true;
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -179,17 +232,43 @@ namespace Izračun_Energije_App
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            float originalna_vrednost_olja = 1.076f;
+            float originalna_vrednost_zplina = 0.782f;
+            float originalna_vrednost_plina = 0.969f;
 
+
+            DialogResult result = MessageBox.Show($"Trenutne cene energentov:\nKurilno olje: {originalna_vrednost_olja}\nPlin: {originalna_vrednost_zplina}\nUtekočinjen plin: {originalna_vrednost_plina}\n\nŽelite ponastaviti cene energentov?", "Ponastavitev cen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                // Če uporabnik klikne "Yes", ponastavimo cene energentov na izvirne vrednosti
+                MessageBox.Show("Cene energentov so bile uspešno ponastavljene.", "Ponastavitev uspešna", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Ponastavimo vrednosti v tekstnih poljih na izvirne vrednosti
+                cena_kolja.Text = originalna_vrednost_olja.ToString();
+                cena_zemeljskega_plina.Text = originalna_vrednost_zplina.ToString();
+                cena_plina.Text = originalna_vrednost_plina.ToString();
+
+
+            }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+            private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            
+            //OMOGOČI UPORABNIKOV VNOS CEN
+            cena_kolja.Enabled = true;
+            cena_zemeljskega_plina.Enabled = true;
+            cena_plina.Enabled = true;
+            cena_elektrike.Enabled = true;
         }
 
         private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
         {
             
+        }
+
+        private void cena_zemeljskega_plina_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

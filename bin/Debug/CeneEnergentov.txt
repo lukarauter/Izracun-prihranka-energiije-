@@ -1,0 +1,154 @@
+Datum zapisa: 02/04/2024 15:32:04
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:32:56
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:35:17
+Kurilno olje: System.Windows.Forms.TextBox, Text: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:36:57
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:37:37
+Kurilno olje: 1,230
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 1,230
+
+Datum zapisa: 02/04/2024 15:40:01
+Kurilno olje: 1,235
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:41:45
+Kurilno olje: 2,233
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:42:58
+Kurilno olje: 8,5
+Zemeljski Plin: 9,5
+Utekočinjeni naftni plin plin: 6,5
+
+Datum zapisa: 02/04/2024 15:43:29
+Kurilno olje: 8,5
+Zemeljski Plin: 9,5
+Utekočinjeni naftni plin plin: 6,5
+
+Datum zapisa: 02/04/2024 15:47:31
+Kurilno olje: 1,235
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:48:25
+Kurilno olje: 1,235
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:49:33
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 15:51:12
+Kurilno olje: 8,5
+Zemeljski Plin: 9,5
+Utekočinjeni naftni plin plin: 6,5
+
+Datum zapisa: 02/04/2024 15:53:43
+Kurilno olje: 8,5
+Zemeljski Plin: 9,5
+Utekočinjeni naftni plin plin: 6,5
+
+Datum zapisa: 02/04/2024 15:57:51
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+Datum zapisa: 02/04/2024 15:58:18
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+Datum zapisa: 02/04/2024 15:59:55
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:03:07
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:04:00
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:04:33
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:04:46
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:04:54
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:05:17
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:05:40
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:06:04
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:06:23
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+
+Datum zapisa: 02/04/2024 16:06:50
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
