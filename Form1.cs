@@ -69,11 +69,11 @@ namespace Izračun_Energije_App
                 writer.WriteLine($"Utekočinjeni naftni plin plin: {cena_plina.Text}");
                 writer.WriteLine();
             }
-      
+
         }
 
 
-    
+
 
 
 
@@ -122,13 +122,13 @@ namespace Izračun_Energije_App
             //CENA KURILNEGA OLJA
             if (radioButton1.Checked)
             {
-                float stroski = float.Parse(label2.Text.Trim())*float.Parse(cena_kolja.Text.Trim());
+                float stroski = float.Parse(label2.Text.Trim()) * float.Parse(cena_kolja.Text.Trim());
                 float letnokWh = float.Parse(label2.Text.Trim()) * trenutnavrednostKurilnegaOlja;
 
                 //RADIATOR
                 if (radioButton4.Checked)
                 {
-                    float novstrosek = (letnokWh / 3.2F)* float.Parse(cena_elektrike.Text.Trim());
+                    float novstrosek = (letnokWh / 3.2F) * float.Parse(cena_elektrike.Text.Trim());
                     float prihranek = stroski - novstrosek;
                     label9.Text = prihranek.ToString("n2");
                 }
@@ -252,7 +252,7 @@ namespace Izračun_Energije_App
             }
         }
 
-            private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
             //OMOGOČI UPORABNIKOV VNOS CEN
             cena_kolja.Enabled = true;
@@ -263,12 +263,125 @@ namespace Izračun_Energije_App
 
         private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
         {
-            
+
         }
 
         private void cena_zemeljskega_plina_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+
+            string[] energenti = { "Kurilno olje", "Zemeljski plin", "Utekočinjeni naftni plin" };
+            string[] nacinOgrevanja = { "Radiatorji", "Talno ogrevanje" };
+
+            string izbraniEnergent = ""; // Shranimo izbrani energent
+            string izbraniNacinOgrevanja = ""; // Shranimo izbrani način ogrevanja
+
+            // Preverimo, kateri energent je bil izbran
+            if (radioButton1.Checked)
+            {
+                izbraniEnergent = "Kurilno olje";
+            }
+            else if (radioButton2.Checked)
+            {
+                izbraniEnergent = "Zemeljski plin";
+            }
+            else if (radioButton3.Checked)
+            {
+                izbraniEnergent = "Utekočinjeni naftni plin";
+            }
+
+            // Preverimo, kateri način ogrevanja je bil izbran
+            if (radioButton4.Checked)
+            {
+                izbraniNacinOgrevanja = "Radiatorji";
+            }
+            else if (radioButton5.Checked)
+            {
+                izbraniNacinOgrevanja = "Talno ogrevanje";
+            }
+
+            // Preverimo, ali je bila izbrana vsaj ena možnost
+            if (izbraniEnergent != "" && izbraniNacinOgrevanja != "")
+            {
+                using (StreamWriter writer = new StreamWriter("PRIHRANKI.txt", true))
+                {
+                    for (int letnaPoraba = 1; letnaPoraba <= 50000; letnaPoraba++)
+                    {
+                        double prihranki = IzracunLetnihPrihrankov(izbraniEnergent, izbraniNacinOgrevanja, letnaPoraba);
+                        string dvedecimalkiPrihranki = prihranki.ToString("F2");
+                        string line = $"{izbraniEnergent}, {izbraniNacinOgrevanja}, {dvedecimalkiPrihranki}";
+                        writer.WriteLine(line);
+                    }
+                }
+
+                MessageBox.Show("Kalkulacije so bile zaključene in podatki so shranjeni v PRIHRANKI.txt");
+            }
+            else
+            {
+                MessageBox.Show("Prosimo, izberite energent in način ogrevanja!");
+            }
+        }
+
+
+    
+        private double IzracunLetnihPrihrankov(string energent, string naciniOgrevanja, float letnaPoraba)
+        {
+            float currentCosts = 0;
+            float currentEnergyValue = 0;
+            float currentElectricityPrice = float.Parse(cena_elektrike.Text.Trim()); // Predpostavka: cena_elektrike je kontrola, ki vsebuje ceno električne energije
+            float newCosts = 0;
+
+            // Calculate current costs and energy value based on selected fuel
+            switch (energent)
+            {
+                case "Kurilno olje":
+                    currentCosts = letnaPoraba * float.Parse(cena_kolja.Text.Trim());
+                    currentEnergyValue = letnaPoraba * 8.5F; // Energija kurilnega olja v kW
+                    break;
+                case "Zemeljski plin":
+                    currentCosts = letnaPoraba * float.Parse(cena_zemeljskega_plina.Text.Trim());
+                    currentEnergyValue = letnaPoraba * 9.5F; // Energija zemeljskega plina v kW
+                    break;
+                case "Utekocinjeni plin":
+                    currentCosts = letnaPoraba * float.Parse(cena_plina.Text.Trim());
+                    currentEnergyValue = letnaPoraba * 6.5F; // Energija utekočinjenega plina v kW
+                    break;
+                default:
+                    // Handle unknown fuel type
+                    break;
+            }
+
+            // Calculate new costs based on heating method
+            if (naciniOgrevanja == "Radiatorji")
+            {
+                newCosts = (currentEnergyValue / 3.2F) * currentElectricityPrice;
+            }
+            else if (naciniOgrevanja == "Talno gretje")
+            {
+                newCosts = (currentEnergyValue / 3.6F) * currentElectricityPrice;
+            }
+
+            // Calculate savings
+            return currentCosts - newCosts;
+        }
+
+
+
+
+
+
+
+
+
     }
+
+
 }
+
+
+
+
