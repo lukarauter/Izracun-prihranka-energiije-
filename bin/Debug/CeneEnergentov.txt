@@ -236,3 +236,9 @@ Zemeljski Plin: 0,782
 Utekočinjeni naftni plin plin: 0,969
 
 
+Datum zapisa: 29/04/2024 11:44:40
+Kurilno olje: 1,076
+Zemeljski Plin: 0,782
+Utekočinjeni naftni plin plin: 0,969
+
+

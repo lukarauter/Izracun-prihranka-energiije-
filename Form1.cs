@@ -15,19 +15,18 @@ namespace Izračun_Energije_App
     public partial class Form1 : Form
     {
 
-
+        private BackgroundWorker backgroundWorker;
         private ErrorProvider errorProvider;
 
         public Form1()
         {
             InitializeComponent();
+            InitializeBackgroundWorker();
             errorProvider = new ErrorProvider();
             cena_kolja.Validating += ValidateInput;
             cena_zemeljskega_plina.Validating += ValidateInput;
             cena_plina.Validating += ValidateInput;
             cena_elektrike.Validating += ValidateInput;
-
-
 
             cena_kolja.Enabled = false;
             cena_zemeljskega_plina.Enabled = false;
@@ -271,14 +270,62 @@ namespace Izračun_Energije_App
 
         }
 
+        private void InitializeBackgroundWorker()
+        {
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerReportsProgress = false;
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+        }
+
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string izbraniEnergent = (string)e.Argument;
+            string izbraniNacinOgrevanja = ""; // Placeholder for selected heating method
+
+            // Determine selected heating method
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (radioButton4.Checked)
+                {
+                    izbraniNacinOgrevanja = "Radiatorji";
+                }
+                else if (radioButton5.Checked)
+                {
+                    izbraniNacinOgrevanja = "Talno ogrevanje";
+                }
+            });
+
+            using (StreamWriter writer = new StreamWriter("PRIHRANKI.txt", true))
+            {
+                for (int letnaPoraba = 1; letnaPoraba <= 50000; letnaPoraba++)
+                {
+                    double prihranki = IzracunLetnihPrihrankov(izbraniEnergent, izbraniNacinOgrevanja, letnaPoraba);
+                    string dvedecimalkiPrihranki = prihranki.ToString("F2");
+                    string line = $"{izbraniEnergent}, {izbraniNacinOgrevanja}, {dvedecimalkiPrihranki}";
+                    writer.WriteLine(line);
+                }
+            }
+        }
+
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show($"An error occurred: {e.Error.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Kalkulacije so bile zaključene in podatki so shranjeni v PRIHRANKI.txt", "Obvestilo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-
-            string[] energenti = { "Kurilno olje", "Zemeljski plin", "Utekočinjeni naftni plin" };
-            string[] nacinOgrevanja = { "Radiatorji", "Talno ogrevanje" };
-
             string izbraniEnergent = ""; // Shranimo izbrani energent
-            string izbraniNacinOgrevanja = ""; // Shranimo izbrani način ogrevanja
 
             // Preverimo, kateri energent je bil izbran
             if (radioButton1.Checked)
@@ -294,40 +341,20 @@ namespace Izračun_Energije_App
                 izbraniEnergent = "Utekočinjeni naftni plin";
             }
 
-            // Preverimo, kateri način ogrevanja je bil izbran
-            if (radioButton4.Checked)
-            {
-                izbraniNacinOgrevanja = "Radiatorji";
-            }
-            else if (radioButton5.Checked)
-            {
-                izbraniNacinOgrevanja = "Talno ogrevanje";
-            }
-
             // Preverimo, ali je bila izbrana vsaj ena možnost
-            if (izbraniEnergent != "" && izbraniNacinOgrevanja != "")
+            if (!string.IsNullOrEmpty(izbraniEnergent))
             {
-                using (StreamWriter writer = new StreamWriter("PRIHRANKI.txt", true))
-                {
-                    for (int letnaPoraba = 1; letnaPoraba <= 50000; letnaPoraba++)
-                    {
-                        double prihranki = IzracunLetnihPrihrankov(izbraniEnergent, izbraniNacinOgrevanja, letnaPoraba);
-                        string dvedecimalkiPrihranki = prihranki.ToString("F2");
-                        string line = $"{izbraniEnergent}, {izbraniNacinOgrevanja}, {dvedecimalkiPrihranki}";
-                        writer.WriteLine(line);
-                    }
-                }
-
-                MessageBox.Show("Kalkulacije so bile zaključene in podatki so shranjeni v PRIHRANKI.txt");
+                // Start the background worker
+                backgroundWorker.RunWorkerAsync(izbraniEnergent);
             }
             else
             {
-                MessageBox.Show("Prosimo, izberite energent in način ogrevanja!");
+                MessageBox.Show("Prosimo, izberite energent!", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
-    
+
         private double IzracunLetnihPrihrankov(string energent, string naciniOgrevanja, float letnaPoraba)
         {
             float currentCosts = 0;
